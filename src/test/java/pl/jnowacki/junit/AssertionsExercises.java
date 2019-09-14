@@ -6,8 +6,10 @@ import pl.jnowacki.model.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -81,9 +83,20 @@ public class AssertionsExercises {
 
 //    check if Clint Eastwood movies won 3 awards
     @Test
-    public void test2() {
+    public void filmsByClintEastwoodShouldHaveWon3Awards() {
 
+        List<Movie> movies = awardedMovies.stream()
+                .filter(movie -> movie.getDirector().getName().equalsIgnoreCase("clint eastwood"))
+                .collect(Collectors.toList());
+
+        long awardCount = movies.stream()
+                .map(Movie::getAwards)
+                .mapToLong(Collection::size)
+                .sum();
+
+        assertEquals(3, awardCount);
     }
+
 
 //    Check if Quentin Tarantino created any movies before 1950
     @Test
