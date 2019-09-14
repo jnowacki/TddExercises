@@ -75,7 +75,8 @@ public class AssertionsExercises {
 
 //    check if awarded movies collection contains only movies with one or more awards
     @Test
-    public void test1() {
+    public void testIfAllMoviesInAwardedListAreAwarded() {
+        awardedMovies.forEach(movie -> assertFalse(movie.getAwards().isEmpty()));
     }
 
 //    check if Clint Eastwood movies won 3 awards
